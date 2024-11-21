@@ -46,8 +46,7 @@ function playGame() {
     playRound(humanSelection, computerSelection);
 }
 
-while (i <= 4)
-    playGame();
+playGame();
 
 console.log("Puntaje: "+humanScore);
 console.log("Puntaje computadora: "+computerScore);
