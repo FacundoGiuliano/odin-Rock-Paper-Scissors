@@ -1,3 +1,4 @@
+
 let i = 0;
 let humanScore = 0;
 let computerScore = 0;
@@ -12,41 +13,37 @@ function getComputerChoice() {
         return "tijera";
 }
 
-function getHumanChoice() {
-    return choice = prompt("Ingrese 'piedra', 'papel' o 'tijera'").toLowerCase();
-}
-
-function playRound(humanChoice, computerChoice) {
+function playRound(playerSelection, computerChoice) {
     i++;
-    console.log(humanChoice);
-    console.log(computerChoice);
-    if (humanChoice === "piedra" && computerChoice === "papel") {
+    console.log("Player: " + playerSelection);
+    console.log("Computer: " + computerChoice);
+    if (playerSelection === "piedra" && computerChoice === "papel") {
         computerScore++;
         return console.log("¡Pierdes! El papel vence a la piedra");
     }
-    else if (humanChoice === "papel" && computerChoice === "tijera") {
+    else if (playerSelection === "papel" && computerChoice === "tijera") {
         computerScore++;
         return console.log("¡Pierdes! La tijera vence al papel")
     }
-    else if (humanChoice === "tijera" && computerChoice === "piedra") {
+    else if (playerSelection === "tijera" && computerChoice === "piedra") {
         computerScore++;
         return console.log("¡Pierdes! La piedra vence a la tijera");
     }
-    else if (humanChoice === computerChoice) {
+    else if (playerSelection === computerChoice) {
         return console.log("Empate !");
     }
     else
         humanScore++;
-        return console.log("Ganaste !");
+    return console.log("Ganaste !");
 }
 
-function playGame() {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    playRound(humanSelection, computerSelection);
-}
+const buttons = document.querySelectorAll('button');
 
-playGame();
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        playRound(button.id, getComputerChoice());
+    });
+});
 
-console.log("Puntaje: "+humanScore);
-console.log("Puntaje computadora: "+computerScore);
+console.log("Puntaje: " + humanScore);
+console.log("Puntaje computadora: " + computerScore);
