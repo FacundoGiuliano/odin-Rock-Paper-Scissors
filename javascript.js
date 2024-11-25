@@ -2,6 +2,8 @@
 let i = 0;
 let humanScore = 0;
 let computerScore = 0;
+let playerSelection = "--";
+let computerChoice = "--";
 
 function getComputerChoice() {
     let choice = Math.random();
@@ -15,27 +17,67 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerChoice) {
     i++;
-    console.log("Player: " + playerSelection);
-    console.log("Computer: " + computerChoice);
+
+    juego.textContent = `Seleccion jugador: ${playerSelection}
+
+Seleccion computadora: ${computerChoice}
+
+`;
+
+    content.textContent = `Puntaje jugador: ${humanScore}
+
+Puntaje computadora: ${computerScore}
+
+`;
+
     if (playerSelection === "piedra" && computerChoice === "papel") {
         computerScore++;
-        return console.log("¡Pierdes! El papel vence a la piedra");
+        return presultados.textContent = "Resultado: ¡Pierdes! El papel vence a la piedra";
     }
     else if (playerSelection === "papel" && computerChoice === "tijera") {
         computerScore++;
-        return console.log("¡Pierdes! La tijera vence al papel")
+        return presultados.textContent = "Resultado: ¡Pierdes! La tijera vence al papel"
     }
     else if (playerSelection === "tijera" && computerChoice === "piedra") {
         computerScore++;
-        return console.log("¡Pierdes! La piedra vence a la tijera");
+        return presultados.textContent = "Resultado: ¡Pierdes! La piedra vence a la tijera";
     }
     else if (playerSelection === computerChoice) {
-        return console.log("Empate !");
+        return presultados.textContent = "Resultado: Empate !";
     }
     else
         humanScore++;
-    return console.log("Ganaste !");
+    return presultados.textContent = "Resultado: Ganaste !";
 }
+
+const resultados = document.querySelector("#resultados");
+
+const presultados = document.createElement("h2");
+presultados.textContent = "Resultado: "
+
+const content = document.createElement("div");
+
+content.classList.add("content");
+
+content.textContent = `Puntaje jugador: ${humanScore}
+
+Puntaje computadora: ${computerScore}
+
+`;
+
+const juego = document.createElement("div");
+
+juego.classList.add("juego");
+
+juego.textContent = `Seleccion jugador: ${playerSelection}
+
+Seleccion computadora: ${computerChoice}
+
+`;
+
+resultados.appendChild(presultados);
+resultados.appendChild(juego);
+resultados.appendChild(content);
 
 const buttons = document.querySelectorAll('button');
 
@@ -44,6 +86,3 @@ buttons.forEach((button) => {
         playRound(button.id, getComputerChoice());
     });
 });
-
-console.log("Puntaje: " + humanScore);
-console.log("Puntaje computadora: " + computerScore);
